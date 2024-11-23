@@ -1,0 +1,292 @@
+﻿<section class="memberLayout container py-5">
+    <div class="d-flex flex-column flex-md-row">
+        @await Html.PartialAsync("_PartialMemberListGroup")
+        <div class="w-100  ps-md-5">
+            @await Html.PartialAsync("_PartialPageTitle", "修改房間")
+            <form action="/" method="post">
+                <div class="row row-cols-1 row-cols-md-2">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">房間標題</label>
+                            <input type="text"class="form-control"id="title"name="title"value="" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="floor" class="form-label">樓層</label>
+                            <input type="number"class="form-control"id="floor"name="floor"value="" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label class="mb-3"> 房型 </label>
+                        <div class="mb-3">
+                            <select class="form-select" name="roomStyle">
+                                <option value="雙人套房">雙人套房</option>
+                                <option value="雙人雅房">雙人雅房</option>
+                                <option value="三人套房">三人套房</option>
+                                <option value="三人雅房">三人雅房</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label class="mb-3"> 床型 </label>
+                        <div class="mb-3">
+                            <select class="form-select" name="bedStyle">
+                                <option value="單人床">單人床</option>
+                                <option value="雙人床">雙人床</option>
+                                <option value="上下舖">上下舖</option>
+                                <option value="地舖">地舖</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="rent" class="form-label">租金 / 月</label>
+                            <input type="number"class="form-control"id="rent"name="rent"value="" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="size" class="form-label">房間大小 / 坪</label>
+                            <input type="number"class="form-control"id="size"name="size"value="" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="people" class="form-label">徵求人數</label>
+                            <input type="number"class="form-control"id="people"name="people"value="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input"type="checkbox"id="hasManage"name="hasManage"value="" />
+                        <label class="form-check-label"for="hasManage">管理費</label>
+                    </div>
+                </div>
+                <div class="mb-3 manage-paid-wrapper d-none">
+                    <input type="number"class="form-control"id="managePaid"name="managePaid"min="0"value="" />
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">地址</label>
+                    <input type="text"class="form-control"id="address"name="address"value="" />
+                </div>
+                <div class="mb-3">
+                    <label for="expect" class="form-label">理想室友</label>
+                    <textarea class="form-control"id="expect"rows="4"cols="50"placeholder="請輸入理想室友的條件，最多 200 字"name="expect"></textarea>
+                    <p class="text-muted text-end" id="charCount"></p>
+                </div>
+                <h3>房間設備</h3>
+                <div class="d-flex flex-wrap">
+                    <div class="me-3">
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input"type="checkbox"id="bed"name="bed"value="" />
+                                <label class="form-check-label"for="bed"style="line-height: 1.5">床</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="me-3">
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input"type="checkbox"id="shelf"name="shelf"value="" />
+                                <label class="form-check-label"for="shelf"style="line-height: 1.5">衣櫃</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="me-3">
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input undefined"type="checkbox"id="desk"name="desk"value="" />
+                                <label class="form-check-label"for="desk"style="line-height: 1.5">桌子</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="me-3">
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input undefined"type="checkbox"id="chair"name="chair"value="" />
+                                <label class="form-check-label"for="chair"style="line-height: 1.5">椅子</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="me-3">
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input undefined"type="checkbox"id="kitchen"name="kitchen"value="" />
+                                <label class="form-check-label"for="kitchen"style="line-height: 1.5">廚房</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="me-3">
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input undefined"type="checkbox"id="laundry"name="laundry"value="" />
+                                <label class="form-check-label"for="laundry"style="line-height: 1.5">洗衣機</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="me-3">
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input undefined"type="checkbox"id="extinguisher"name="extinguisher"value="" />
+                                <label class="form-check-label"for="extinguisher"style="line-height: 1.5">滅火器</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="me-3">
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input "type="checkbox"id="tv"name="tv"value="" />
+                                <label class="form-check-label"for="tv"style="line-height: 1.5">電視</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="me-3">
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input "type="checkbox"id="wifi"name="wifi"value="" />
+                                <label class="form-check-label"for="wifi"style="line-height: 1.5">網路</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="me-3">
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input "type="checkbox"id="assistant"name="assistant"value="" />
+                                <label class="form-check-label"for="assistant"style="line-height: 1.5">監視器</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <h3 class="text-center mb-3">房東資訊</h3>
+                <div class="row row-cols-1 row-cols-md-2">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="hostName" class="form-label">房東姓名</label>
+                            <input type="text"class="form-control "id="hostName"name="hostName"value="" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="hostPhone" class="form-label">房東電話</label>
+                            <input type="tel"class="form-control"id="hostPhone"placeholder="09xxxxxxxx"name="hostPhone"value="" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="genderWrapper">
+                            <label>房東性別</label>
+                            <div class="mt-2">
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input"type="radio"name="hostGender"id="male"value="male" />
+                                        <label class="form-check-label"for="male"style="line-height: 1.5">男</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input undefined"type="radio"name="hostGender"id="female"value="female" />
+                                        <label class="form-check-label"for="female"style="line-height: 1.5">女</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="container">
+                    <h3 class="text-center mb-3">上傳房間圖片</h3>
+                    <div class="roomPhotos row row-cols-1 row-cols-md-2 row-cols-lg-3 mb-3">
+                        <div class="col mb-4">
+                            <div class="position-relative">
+                                <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&amp;w=1740&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"alt=""class="object-cover roomPhoto w-100" />
+                                <button type="button"class="btn btn-danger rounded-circle btn-delete">
+                                    <i class="bi bi-x" style="font-size: 16px"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <input type="file"accept="image/*"id="roomPhotos"name="roomPhotos"multiple=""class="d-none" />
+                        <label type="button"for="roomPhotos"class="text-center py-5 w-100 mb-3 rounded"style="border: 1px dashed gray">
+                            <i class="fa fa-plus text-gray"aria-hidden="true"style="font-size: 50px"></i>
+                            <p class="text-gray">新增房間圖片</p>
+                        </label>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary px-5 py-3">
+                        還原
+                    </button>
+                    <button type="submit" class="btn btn-primary px-5 py-3">
+                        修改
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script>
+        $("form").on("submit", function (event) {
+            event.preventDefault(); // 阻止表單提交和頁面重載
+        });
+
+        let length = $("#intro").text().length
+        $("#charCount").text(`${length}/200`)
+        $("#intro").on("input", function () {
+            $(this).text($(this).val());
+            length = $(this).text().length;
+            $("#charCount").text(`${length}/200`)
+        })
+
+        $(document).ready(function () {
+            $("#expect").on("input", function () {
+                $(".text-muted").text(`${this.value.length}/200`);
+            });
+
+            $('button[type="submit"]').on("click", function () {
+                $(".alertWrapper").toggleClass("d-none");
+                setTimeout(() => {
+                    $(".alertWrapper").toggleClass("d-none");
+                }, 1500);
+            });
+
+            $("#hasManage").on("change", function () {
+                $(".manage-paid-wrapper").toggleClass(
+                    "d-none",
+                    !$(this).is(":checked")
+                );
+            });
+
+            $("#roomPhotos").on("change", function (event) {
+                const files = event.target.files;
+
+                $.each(files, function (index, file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const imageSrc = e.target.result;
+                        const imageDiv = $(`
+                                            <div class="col mb-4">
+                                                <div class="position-relative">
+                                                    <img src="${imageSrc}" alt="" class="object-cover roomPhoto w-100"/>
+                                                    <button type="button" class="btn btn-danger rounded-circle btn-delete">
+                                                        <i class="bi bi-x" style="font-size: 16px"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        `);
+
+                        $(".roomPhotos").prepend(imageDiv);
+                    };
+
+                    reader.readAsDataURL(file);
+                });
+            });
+
+            $(document).on("click", ".btn-delete", function () {
+                $(this).closest(".col").remove();
+            });
+        });
+    </script>
+}

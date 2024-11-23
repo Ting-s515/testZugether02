@@ -1,0 +1,384 @@
+﻿<section class="memberLayout container py-5">
+    <div class="d-flex flex-column flex-md-row">
+        @await Html.PartialAsync("_PartialMemberListGroup")
+        <div class="w-100  ps-md-5">
+            @if (ViewBag.isAdd)
+            {
+                @await Html.PartialAsync("_PartialPageTitle", "刊登房間")
+                <form action="DeleteRoom" method="post">
+                    <div class="row row-cols-1 row-cols-md-2">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="title" class="form-label">房間標題</label>
+                                <input type="text" class="form-control" id="title" name="title" value="" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="floor" class="form-label">樓層</label>
+                                <input type="number" class="form-control" id="floor" name="floor" value="" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label class="mb-3"> 房型 </label>
+                            <div class="mb-3">
+                                <select class="form-select" name="roomStyle">
+                                    <option value="雙人套房">雙人套房</option>
+                                    <option value="雙人雅房">雙人雅房</option>
+                                    <option value="三人套房">三人套房</option>
+                                    <option value="三人雅房">三人雅房</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label class="mb-3"> 床型 </label>
+                            <div class="mb-3">
+                                <select class="form-select" name="bedStyle">
+                                    <option value="單人床">單人床</option>
+                                    <option value="雙人床">雙人床</option>
+                                    <option value="上下舖">上下舖</option>
+                                    <option value="地舖">地舖</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="rent" class="form-label">租金 / 月</label>
+                                <input type="number" class="form-control" id="rent" name="rent" value="" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="size" class="form-label">房間大小 / 坪</label>
+                                <input type="number" class="form-control" id="size" name="size" value="" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="people" class="form-label">徵求人數</label>
+                                <input type="number" class="form-control" id="people" name="people" value="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="hasManage" name="hasManage" value="" />
+                            <label class="form-check-label" for="hasManage">管理費</label>
+                        </div>
+                    </div>
+                    <div class="mb-3 manage-paid-wrapper d-none">
+                        <input type="number" class="form-control" id="managePaid" name="managePaid" min="0" value="" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">地址</label>
+                        <input type="text" class="form-control" id="address" name="address" value="" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="expect" class="form-label">理想室友</label>
+                        <textarea class="form-control" id="expect" rows="4" cols="50" placeholder="請輸入理想室友的條件，最多 200 字" name="expect"></textarea>
+                        <p class="text-muted text-end" id="charCount"></p>
+                    </div>
+                    <h3>房間設備</h3>
+                    <div class="d-flex flex-wrap">
+                        <div class="me-3">
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="bed" name="bed" value="" />
+                                    <label class="form-check-label" for="bed" style="line-height: 1.5">床</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="me-3">
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="shelf" name="shelf" value="" />
+                                    <label class="form-check-label" for="shelf" style="line-height: 1.5">衣櫃</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="me-3">
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input undefined" type="checkbox" id="desk" name="desk" value="" />
+                                    <label class="form-check-label" for="desk" style="line-height: 1.5">桌子</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="me-3">
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input undefined" type="checkbox" id="chair" name="chair" value="" />
+                                    <label class="form-check-label" for="chair" style="line-height: 1.5">椅子</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="me-3">
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input undefined" type="checkbox" id="kitchen" name="kitchen" value="" />
+                                    <label class="form-check-label" for="kitchen" style="line-height: 1.5">廚房</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="me-3">
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input undefined" type="checkbox" id="laundry" name="laundry" value="" />
+                                    <label class="form-check-label" for="laundry" style="line-height: 1.5">洗衣機</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="me-3">
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input undefined" type="checkbox" id="extinguisher" name="extinguisher" value="" />
+                                    <label class="form-check-label" for="extinguisher" style="line-height: 1.5">滅火器</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="me-3">
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input " type="checkbox" id="tv" name="tv" value="" />
+                                    <label class="form-check-label" for="tv" style="line-height: 1.5">電視</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="me-3">
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input " type="checkbox" id="wifi" name="wifi" value="" />
+                                    <label class="form-check-label" for="wifi" style="line-height: 1.5">網路</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="me-3">
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input " type="checkbox" id="assistant" name="assistant" value="" />
+                                    <label class="form-check-label" for="assistant" style="line-height: 1.5">監視器</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <h3 class="text-center mb-3">房東資訊</h3>
+                    <div class="row row-cols-1 row-cols-md-2">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="hostName" class="form-label">房東姓名</label>
+                                <input type="text" class="form-control " id="hostName" name="hostName" value="" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="hostPhone" class="form-label">房東電話</label>
+                                <input type="tel" class="form-control" id="hostPhone" placeholder="09xxxxxxxx" name="hostPhone" value="" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="genderWrapper">
+                                <label>房東性別</label>
+                                <div class="mt-2">
+                                    <div class="mb-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="hostGender" id="male" value="male" />
+                                            <label class="form-check-label" for="male" style="line-height: 1.5">男</label>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input undefined" type="radio" name="hostGender" id="female" value="female" />
+                                            <label class="form-check-label" for="female" style="line-height: 1.5">女</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="container">
+                        <h3 class="text-center mb-3">上傳房間圖片</h3>
+                        <div class="roomPhotos row row-cols-1 row-cols-md-2 row-cols-lg-3 mb-3">
+
+                            <input type="file" accept="image/*" id="roomPhotos" name="roomPhotos" multiple="" class="d-none" />
+                            <label type="button" for="roomPhotos" class="text-center py-5 w-100 mb-3 rounded" style="border: 1px dashed gray">
+                                <i class="fa fa-plus text-gray" aria-hidden="true" style="font-size: 50px"></i>
+                                <p class="text-gray">新增房間圖片</p>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="text-center ">
+                        <button type="submit" class="btn btn-primary px-5 py-3">刊登</button>
+                    </div>
+                </form>
+            }
+            else
+            {
+                @await Html.PartialAsync("_PartialPageTitle", "房間資訊")
+                <div class="roomInfo mb-3">
+                    @* 輪播 *@
+                    <div class="swiper mySwiper mb-3 ">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide w-100">
+                                <img src="~/images/search/room1.jpg" class="w-100" style="height:500px" alt="banner image" />
+                            </div>
+                            <div class="swiper-slide w-100">
+                                <img src="~/images/search/room2.jpg" class="w-100" style="height:500px" alt="banner image" />
+                            </div>
+                            <div class="swiper-slide w-100">
+                                <img src="~/images/search/room1.jpg" class="w-100" style="height:500px" alt="banner image" />
+                            </div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                    <div class="card p-3 shadow-sm">
+                        <div class="row row-cols-1 row-cols-md-2">
+                            <div class="col">
+                                <div class="mb-2 d-flex align-items-center">
+                                    <span class="material-symbols-outlined me-2">floor</span>樓層 : 2樓
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-2 d-flex align-items-center">
+                                    <span class="material-symbols-outlined me-2">night_shelter</span>房型 : 三人雅房
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-2 d-flex align-items-center">
+                                    <span class="material-symbols-outlined me-2">bed</span>床型 : 上下舖
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-2 d-flex align-items-center">
+                                    <span class="material-symbols-outlined me-2">paid</span>租金 : 8000/月(不含水電及管理費月)
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-2 d-flex align-items-center">
+                                    <span class="material-symbols-outlined me-2">paid</span>管理費 : 2000/月
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-2 d-flex align-items-center">
+                                    <span class="material-symbols-outlined me-2"
+                                          style="transform: rotate(-45deg)">width</span>房間大小 : 20坪
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-2 d-flex align-items-center">
+                                    <span class="material-symbols-outlined me-2">person</span>徵求人數 : 尋求1位
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-2 d-flex align-items-center">
+                                    <span class="material-symbols-outlined me-2">location_on</span>地址 : 新北市板橋區文化路一段26號
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-2 d-flex align-items-start">
+                            <span class="material-symbols-outlined me-2">folded_hands</span>理想室友 :
+                            個性隨和，彼此樂意分享，注重生活品質愛乾淨，洗完澡會撿毛髮、吃完餐盤不過夜、廚餘垃圾收拾妥善、互相尊重深夜放輕腳步，如果你是我們找尋的室友，歡迎一起入住溫馨的家。
+                        </div>
+                        <hr />
+                        <div class="roomEquipments">
+                            <h3>房間設備</h3>
+                            <div class="d-flex flex-wrap py-2">
+                                <div class="d-flex align-items-center px-2">
+                                    <span class="material-symbols-outlined text-success roomEquipment">bed<span>床</span></span>
+                                </div>
+                                <div class="d-flex align-items-center px-2">
+                                    <span class="material-symbols-outlined text-success roomEquipment">shelves<span>衣櫃</span></span>
+                                </div>
+                                <div class="d-flex align-items-center px-2">
+                                    <span class="material-symbols-outlined text-success roomEquipment">table_restaurant<span>桌子</span></span>
+                                </div>
+                                <div class="d-flex align-items-center px-2">
+                                    <span class="material-symbols-outlined text-success roomEquipment">chair_alt<span>椅子</span></span>
+                                </div>
+                                <div class="d-flex align-items-center px-2">
+                                    <span class="material-symbols-outlined text-success roomEquipment">kitchen<span>廚房</span></span>
+                                </div>
+                                <div class="d-flex align-items-center px-2">
+                                    <span class="material-symbols-outlined text-success roomEquipment">local_laundry_service<span>洗衣機</span></span>
+                                </div>
+                                <div class="d-flex align-items-center px-2">
+                                    <span class="material-symbols-outlined text-light text-decoration-line-through roomEquipment">fire_extinguisher<span>滅火器</span></span>
+                                </div>
+                                <div class="d-flex align-items-center px-2">
+                                    <span class="material-symbols-outlined text-success roomEquipment">tv<span>電視</span></span>
+                                </div>
+                                <div class="d-flex align-items-center px-2">
+                                    <span class="material-symbols-outlined text-success roomEquipment">wifi<span>網路</span></span>
+                                </div>
+                                <div class="d-flex align-items-center px-2">
+                                    <span class="material-symbols-outlined text-success roomEquipment">assistant_device<span>監視器</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="hostInfo">
+                            <h3>房東資訊</h3>
+                            <div class="px-2">
+                                <table style="max-width: 300px">
+                                    <tbody>
+                                        <tr class="">
+                                            <td>姓名</td>
+                                            <td>王小美</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="pe-1">性別</td>
+                                            <td class="px-1">女</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="pe-1">連絡電話</td>
+                                            <td class="px-1">
+                                                <a href="tel:+0912345678">0912345678</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form action="AddRoom" method="post">
+                    <div class="text-center ">
+                        <button type="button" class="btn btn-primary px-5 py-3 d-none" id="redirectToRoom">跳轉房間</button>
+                        <button type="button" class="btn btn-primary px-5 py-3 d-none" id="underReview" disabled>審核中</button>
+                        <button type="submit" class="btn btn-danger px-5 py-3">刪除已刊登房間</button>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</section>
+
+<script>
+    $(function () {
+        var roomID = 92;
+        console.log(roomID);
+        $.ajax({
+            url: '@Url.Action("CheckEnabled", "Member")',
+            type: "POST",
+            data: {
+                roomID: roomID
+            },
+            success: function (response) {
+                if (response == true) {
+                    $('#redirectToRoom').removeClass('d-none');
+                }
+                else {
+                    $('#underReview').removeClass('d-none');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("錯誤訊息:", error);
+            }
+        });
+        $('#redirectToRoom').click(function () {
+            window.location.href = `/RoomID/${roomID}`;
+        });
+    });
+</script>

@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; ;
+}
+
+@model List<Contact_us>
+
+
+<div class="p-3 w-100">
+    <h3 class="text-center">聯絡我們列表</h3>
+    <hr />
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">編號</th>
+                <th scope="col" class="text-center">標題</th>
+                <th scope="col" class="text-center">email</th>
+                <th scope="col" class="text-center">姓名</th>
+                <th scope="col" class="text-center">聯絡方式</th>
+                @* <th scope="col" class="text-center">註冊日期</th> *@
+                <th scope="col" class="text-center">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in Model)
+            {
+                <tr>
+                    <td class="text-center">@c.contact_id</td>
+                    <td class="text-center">@c.title</td>
+                    <td class="text-center">@c.email</td>
+                    <td class="text-center">@c.name</td>
+                    <td class="text-center">@c.phone</td>
+                    <td class="text-end">
+                        <a href="/Admin/ContactView/@c.contact_id" class="btn btn-success btn-sm">檢視</a>
+                        <a href="/Admin/ContactDelete/@c.contact_id" class="btn btn-outline-danger btn-sm">刪除</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

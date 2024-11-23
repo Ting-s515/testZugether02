@@ -1,0 +1,111 @@
+﻿<section class="memberLayout container py-5">
+    <div class="d-flex flex-column flex-md-row">
+        <!-- 左測欄位 -->
+        @await Html.PartialAsync("_PartialMemberListGroup")
+        <!-- 會員通知 -->
+        <div class="w-100  ps-md-5">
+            <div class="px-3 CustomizedScroll" style="height: 550px; overflow-y: scroll;">
+                @for (int i = 1; i <= 6; i++)
+                {
+                    <div>
+                        <div class="card mb-3">
+                            <div class="row align-items-center">
+                                <div class="col-3 col-md-2 ">
+                                    <div class="card-body">
+                                        <img src="https://images.unsplash.com/photo-1508341591423-4347099e1f19?w=500&amp;auto=format&amp;fit=crop&amp;q=60&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fG1hbnxlbnwwfHwwfHx8MA%3D%3D"
+                                             alt="" class="object-cover rounded-circle me-2 "
+                                             style="width: 70px; height: 70px;">
+                                    </div>
+                                </div>
+                                <div class="col-9 col-md-10 ">
+                                    <div class="card-body">
+                                        <div class="d-md-flex flex-column flex-lg-row justify-content-between align-items-center">
+                                            <div class="mb-3 mb-lg-0">
+                                                <p class="d-flex align-items-center justify-content-center">
+                                                    <button type="button" class="btn text-secondary"
+                                                            data-bs-toggle="modal" data-bs-target="#MemberModal"
+                                                            style="margin-right: -12px;">
+                                                        吳康人 @i
+                                                    </button>向您發出合租邀約
+                                                </p>
+                                            </div>
+                                            <div class="d-flex ">
+                                                <button type="button"
+                                                        class="btn btn-primary w-50 me-2">
+                                                    同意
+                                                </button>
+                                                <button type="button" class="btn btn-danger w-50">取消</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @*做成 _PartialView *@
+                <!-- 會員個人資料彈出視窗 -->
+                <div class="modal fade" id="MemberModal" data-bs-backdrop="static" tabindex="-1"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header border-bottom-0">
+                                <button type="button" class="btn-close"
+                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body ">
+                                <div class="d-flex flex-column align-items-center p-3">
+                                    <div class="avatar" style="width: 200px; height: 200px;">
+                                        <img src="https://images.unsplash.com/photo-1508341591423-4347099e1f19?w=500&amp;auto=format&amp;fit=crop&amp;q=60&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fG1hbnxlbnwwfHwwfHx8MA%3D%3D"
+                                             alt="" class="rounded-circle object-cover w-100 h-100">
+                                    </div>
+                                    <h1>吳康人</h1>
+                                    <div class="d-flex flex-column align-items-start">
+                                        <p>暱稱 : 康康</p>
+                                        <p>出生日期 : 1999-01-01</p>
+                                        <p>性別 : 男</p>
+                                        <p>電話 : 0912345678</p>
+                                        <p class="text-break">
+                                            自我介紹
+                                            :大家好，我是吳康人，不是那個吳慷仁，可以叫我康康，但我也不是那個康康，歡迎大家來認識。大家好，我是吳康人，不是那個吳慷仁，可以叫我康康，但我也不是那個康康，歡迎大家來認識。大家好，我是吳康人，不是那個吳慷仁，可以叫我康康，但我也不是那個康康，歡迎大家來認識。因為很重要所以講三次。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script>
+        $('.card').on('click', '.btn-danger', function (event) {
+            // `event.target` 是被點擊的孫子元素
+            let clickedchild = $(event.target);
+
+            // 找到該孫子元素的祖父層父元素 `.card`
+            let parentDiv = clickedchild.closest('.card');
+
+            // 刪除父元素
+            parentDiv.detach();
+
+            // 如果CustomizedScroll裡面沒有div背景要顯示灰色
+            $('.CustomizedScroll').each(function () {
+                // 使用 `find` 方法尋找 `.card` 孫子元素
+                let haschild = $(this).find('.card').length > 0;
+
+                // 判斷是否有孫子元素，若無則增加顯示文字並移除存放.card的區域
+                if (!haschild) {
+                    //
+                    $(this).before('<h3 class="text-center mt-3">尚無合租邀約</h3>');
+
+                    $(this).detach();
+                }
+            });
+
+        });
+    </script>
+}

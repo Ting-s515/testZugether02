@@ -1,0 +1,69 @@
+﻿@model RoomViewModel
+@*測試回覆彈出*@
+<style>
+	.modal-header {
+		height: 25px;
+	}
+
+	.modal-body {
+		margin: 5px 10px;
+		padding: 5px;
+	}
+</style>
+<div class="modal fade" id="ReplyModal" data-bs-backdrop="static" tabindex="-1"
+	 aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header border-bottom-0">
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				@if (Model.roomMessages != null && Model.roomMessages.Any())
+				{
+					@foreach (var message in Model.roomMessages)
+					{
+						<div class="messageItem mb-3 d-flex">
+							@{
+								if (message.avatar != null)
+								{
+									string imageBase64 = Convert.ToBase64String(message.avatar);
+									string imageSrc = $"data:image/jpeg;base64,{imageBase64}";
+									<img src="@imageSrc" alt="" class="object-cover rounded-circle me-2 user-shot">
+								}
+								else
+								{
+									<img src="~/images/peopleImg.png" alt="" class="object-cover rounded-circle me-2 user-shot">
+								}
+							}
+
+							<div class="messageBubble p-2 rounded">
+								<div class="d-flex align-items-center justify-content-between">
+									<strong class="member-name">
+										@message.member_name
+									</strong>
+									<strong class="message-basement">B@(message.message_basement)</strong>
+								</div>
+								<p class="message-text d-flex align-items-center">
+									@if (!string.IsNullOrEmpty(message.reply_member_content))
+									{
+										<strong class="reply-member-name">@message.reply_member_content: </strong>
+									}
+									@message.message_content
+								</p>
+								@*<span class="reply">回覆</span>*@
+								<span class="messageTime">@message.post_time.ToString()</span>
+							</div>
+						</div>
+					}
+				}
+				else
+				{
+					<div class=" mb-2 d-flex" id="No-message">
+						<div class=" p-2  w-100 text-center text-muted">嘗試抓取留言失敗</div>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+</div>
+

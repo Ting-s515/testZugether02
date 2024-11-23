@@ -1,0 +1,193 @@
+﻿@using Zugether.DTO
+@using System.Linq
+@model IEnumerable<RoomViewModel>
+@await Html.PartialAsync("_PartialSearch")
+<div class="container mt-5">
+	<div class="row row-cols-1 row-cols-md-12 g-0 card-element">
+		@*動態區*@
+		@if (Model != null && Model.Any())
+		{
+			@foreach (var room in Model)
+			{
+				<div class="card mb-3" data-room-id="@(room.Room?.room_id)" style="height:300px;">
+					@*利用asp-route-roomID="@room.Room?.room_id)" 送對應資料*@
+					<a asp-action="Room" asp-controller="Search" asp-route-roomID="@(room.Room?.room_id)" class="card-href" id="roomLink">
+						@*asp-route-roomID 是用來設定 URL 中 roomID 參數的值*@
+						<div class="row">
+							<div class="col-md-4">
+								@{
+									if (room.roomImages != null && room.roomImages.Any())
+									{
+										var firstImage = room.roomImages.FirstOrDefault();
+										string imageBase64 = Convert.ToBase64String(firstImage.room_photo);
+										string imageType = $"data:image/{firstImage.photo_type};base64,{imageBase64}";
+										<img src="@imageType" alt="Room Image" class="img-fluid rounded-md-start room-image">
+									}
+									else
+									{
+										<img src="~/images/rooms/room@(room.Room?.room_id).jpg" alt="Room Image" class="img-fluid rounded-md-start room-image">
+									}
+								}
+							</div>
+							<div class="col-md-8">
+								<div class="card-body">
+									<div class="row-md-1">
+										<p class="card-title d-flex justify-content-start align-items-center">
+											@($"{room.Room?.room_title}")
+											@if (room.deviceList?.FirstOrDefault()?.canSmoking == true)
+											{
+												<span class="d-flex align-items-center card-text ms-3">
+													<span class="material-symbols-outlined me-1">smoking_rooms</span>
+													可抽菸
+												</span>
+											}
+											@if (room.deviceList?.FirstOrDefault()?.canPet == true)
+											{
+												<span class="d-flex align-items-center card-text ms-3">
+													<span class="material-symbols-outlined me-1">pets</span>
+													可養寵物
+												</span>
+											}
+											<span class="heart" style="margin-left:auto;">
+												<input id="heart-checkbox-@(room.Room?.room_id)" type="checkbox" class="heart-checkbox">
+												<label for="heart-checkbox-@(room.Room?.room_id)" class="heart-label">
+													<i class="fa-solid fa-heart"></i>
+												</label>
+
+											</span>
+										</p>
+										<p class="card-text ">@($"{room.Room?.post_date?.ToString()}")</p>
+
+									</div>
+									<div class="row row-cols-1 row-cols-md-2">
+										<div class="col-12 col-md-6">
+											<div class="d-flex align-items-center card-text">
+												<span class="material-symbols-outlined me-2">
+													floor
+												</span>
+												@($"{room.Room?.floor}")樓
+											</div>
+										</div>
+										<div class="col-12 col-md-6">
+											<div class="d-flex align-items-center card-text ">
+												<span class="material-symbols-outlined me-2">
+													night_shelter
+												</span>
+												@($"{room.Room?.room_type}")
+											</div>
+										</div>
+										<div class="col-12 col-md-6">
+											<div class="d-flex align-items-center card-text ">
+												<span class="material-symbols-outlined me-2">bed</span>
+												@($"{room.Room?.bed_type}")
+											</div>
+										</div>
+										<div class="col-12 col-md-6">
+											<div class="d-flex align-items-center card-text ">
+												<span class="material-symbols-outlined me-2">paid</span>
+												租金@($"{room.Room?.rent}")/月(不含水電及管理費)
+											</div>
+										</div>
+										<div class="col-12 col-md-6">
+											<div class="d-flex align-items-center card-text ">
+												<span class="material-symbols-outlined me-2"
+													  style="transform: rotate(-45deg);">width</span>
+												@($"{room.Room?.room_size}")坪
+											</div>
+										</div>
+										<div class="col-12 col-md-6">
+											<div class="d-flex align-items-center card-text ">
+												<span class="material-symbols-outlined me-2">person</span>
+												尋求@($"{room.Room?.roommate_num}")位
+											</div>
+										</div>
+										<div class="col-12 col-md-6">
+											<div class="d-flex align-items-center card-text ">
+												<span class="material-symbols-outlined me-2">location_on</span>
+												@($"{room.Room?.address}")
+											</div>
+										</div>
+										<div class="col-12 col-md-6">
+											<div class="d-flex align-items-center card-text">
+												<span class="material-symbols-outlined me-2">work</span>
+												希望室友工作時間: @($"{room.Room?.prefer_jobtime}")班
+											</div>
+										</div>
+									</div>
+									<div class="mt-2  d-flex align-items-center">
+										<div class="d-flex align-items-start">
+											<span class="material-symbols-outlined me-2">folded_hands</span>
+											<span class=" card-text text-break" style="margin-top:0px;">@($"{room.Room?.roommate_description}")</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			}
+		}
+		else
+		{
+			@*顯示查無結果*@
+			<h1>@ViewBag.Message</h1>
+		}
+		<!--foreach結束-->
+		<h3>搜尋條件: @ViewBag.CityList</h3>
+		<div id="alert-container" style="margin:20px;"></div>
+		@*動畫Loading*@
+		<div id="loading-container"></div>
+	</div>
+</div>
+
+<script>
+	$(function () {
+		var isLogin = @JsonConvert.SerializeObject(ViewContext.HttpContext.Session.GetString("isLogin") == "true");	
+		var memberID, memberName, memberEmail;
+		if (isLogin) {
+			memberID = sessionStorage.getItem("memberID");
+			memberName = sessionStorage.getItem("memberName");
+			memberEmail = sessionStorage.getItem("memberEmail");
+		}
+		checkFavoriteRoom();
+		// 使用 PerformanceNavigationTiming API 來檢測是否從快取載入
+		const [navigation] = performance.getEntriesByType("navigation");
+		if (navigation && navigation.type === "back_forward") {
+			console.log("載入方式", navigation.type);
+			checkFavoriteRoom();
+			console.log("檢查checkFavoriteRoom()")
+		}
+
+		function checkFavoriteRoom() {
+			// var memberID = 1;
+			//id開頭=
+			$('[id^="heart-checkbox-"]').prop('checked', false);
+			$.ajax({
+				url: '@Url.Action("checkFavoriteRoom", "partialView")',
+				type: 'POST',
+				data: { memberID: memberID },
+				success: function (response) {
+					// 返回room_id
+					console.log("checkFavoriteroomID= ", response);
+					response.forEach(function (roomID) {
+						$('#heart-checkbox-' + roomID).prop('checked', true);
+					});
+				},
+				error: ajaxError
+			});
+		}	
+		//$(function ()結束
+		
+	});
+	//通用錯誤函式
+	function ajaxError(xhr, status, error) {
+		console.log("Error: " + (xhr.responseJSON?.errorMessage || ""));
+		console.log("Detailed Error: " + (xhr.responseJSON?.innerException || ""));
+		console.log("Stack Trace: " + (xhr.responseJSON?.stackTrace || ""));
+		console.log("Status: " + status + "state" + state);
+	}
+</script>
+
+
+
+
