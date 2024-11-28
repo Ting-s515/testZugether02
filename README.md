@@ -13,7 +13,6 @@
     <ul>
         <li><a href="#project-description">專案說明</a></li>
         <li><a href="#responsible-for-project">我負責的項目</a></li>
-        <li><a href="#project-structure">專案架構</a></li>
         <li><a href="#technology-application">技術應用</a></li>
         <li><a href="#database-design">資料庫設計</a></li>
         <li><a href="#function-description">功能說明</a></li>
@@ -31,7 +30,6 @@
         <li>留言板: 使用SingnalR技術，實現即時雙向通訊功能。</li>
         <li>我的收藏: 開發房源收藏功能，讓用戶能保存感興趣的房源。</li>
     </ul>
-    <h2 id="project-structure">專案架構 : </h2>
     <h2 id="technology-application">技術應用 :　</h2>
     <ul>
         <li>前端 :</li>
