@@ -1,4 +1,14 @@
-<h1>Zugether合租網站</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Zugether合租網站</h1>
     <h2>目錄 : </h2>
     <ul>
         <li><a href="#project-description">專案說明</a></li>
@@ -27,13 +37,12 @@
         <li>前端 :</li>
         <ul>
             <li>HTML/CSS</li>
-            <li>JS</li>
+            <li>JS & jQuery</li>
             <li>Bootstrap</li>
         </ul>
         <li>後端</li>
         <ul>
             <li>ASP.NET MVC</li>
-            <li>SignalR</li>
         </ul>
         <li>資料庫:</li>
         <ul>
@@ -43,6 +52,14 @@
         <ul>
             <li>Google OAuth</li>
             <li>Google Maps</li>
+        </ul>
+        <li>其他:</li>
+        <ul>
+            <li>Google OAuth</li>
+            <li>Google Maps</li>
+            <li>SignalR</li>
+            <li>Swiper</li>
+            <li>Animate.css</li>
         </ul>
     </ul>
     <h2 id="database-design">資料庫設計 : </h2>
@@ -54,3 +71,6 @@
         <li>即時留言功能：租客與房東可以即時留言互動，促進雙方溝通，提升資訊透明度。</li>
         <li>動畫效果優化：利用 Animate.css 增加頁面動態效果，提供更吸引人的視覺體驗。</li>
     </ul>
+</body>
+
+</html>
