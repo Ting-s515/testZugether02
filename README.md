@@ -19,7 +19,7 @@
         <li>搜尋房間: 提供多條件篩選，使用 LINQ 實現高效的資料查詢。</li>
         <li>google登入: 串接Google OAuth，以便讓用戶加快登入流程。</li>
         <li>留言板: 使用SingnalR技術，實現即時雙向通訊功能。</li>
-        <li>我的收藏: 開發房源收藏功能，讓用戶能保存感興趣的房源並輕鬆管理。</li>
+        <li>我的收藏: 開發房源收藏功能，讓用戶能保存感興趣的房源。</li>
     </ul>
     <h2 id="project-structure">專案架構 : </h2>
     <h2 id="technology-application">技術應用 :　</h2>
