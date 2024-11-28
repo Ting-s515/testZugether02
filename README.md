@@ -63,9 +63,19 @@
    <h2 id="function-description">功能說明 :</h2>
     <ul>
         <li>
+            房源搜尋：用戶可以輕鬆發布房源，並透過多重篩選功能快速找到符合需求的合租物件。
+        </li>
+        <li>
             Google 快速登入：整合 Google OAuth 提供快速登入功能，簡化註冊流程，提升用戶體驗。
-            <video src="https://i.imgur.com/oNTeIvb.mp4" width="600" autoplay loop muted playsinline></video>
-
+        </li>
+        <li>
+            地圖整合：使用 Google Maps API 將房源位置直觀呈現，讓用戶更輕鬆地確認房源周邊環境。
+        </li>
+        <li>
+            即時留言功能：會員之間可以即時留言互動，促進雙方溝通，提升資訊透明度。
+        </li>
+        <li>
+            動畫效果優化：利用 Animate.css 增加頁面動態效果，提供更吸引人的視覺體驗。
         </li>
     </ul>
 </body>
