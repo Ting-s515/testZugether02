@@ -60,14 +60,39 @@
         </ul>
     </ul>
     <h2 id="database-design">資料庫設計 : </h2>
-    <h2 id="function-description">功能說明 : </h2>
-    <ul>
-        <li>房源發布與搜尋：用戶可以輕鬆發布房源，並透過多重篩選功能快速找到符合需求的合租物件。</li>
-        <li>Google 快速登入：整合 Google OAuth 提供快速登入功能，簡化註冊流程，提升用戶體驗。</li>
-        <li>地圖整合：使用 Google Maps API 將房源位置直觀呈現，讓用戶更輕鬆地確認房源周邊環境。</li>
-        <li>即時留言功能：租客與房東可以即時留言互動，促進雙方溝通，提升資訊透明度。</li>
-        <li>動畫效果優化：利用 Animate.css 增加頁面動態效果，提供更吸引人的視覺體驗。</li>
-    </ul>
+    <h2 id="function-description">功能說明 :</h2>
+<ul>
+    <li>
+        房源發布與搜尋：
+        <br>
+        <img src="https://yourgifurl.com/post_and_search.gif" alt="房源發布與搜尋" width="600">
+        <p>用戶可以輕鬆發布房源，並透過多重篩選功能快速找到符合需求的合租物件。</p>
+    </li>
+    <li>
+        Google 快速登入：
+        <br>
+        <img src="https://yourgifurl.com/google_login.gif" alt="Google 快速登入" width="600">
+        <p>整合 Google OAuth 提供快速登入功能，簡化註冊流程，提升用戶體驗。</p>
+    </li>
+    <li>
+        地圖整合：
+        <br>
+        <img src="https://yourgifurl.com/map_integration.gif" alt="地圖整合" width="600">
+        <p>使用 Google Maps API 將房源位置直觀呈現，讓用戶更輕鬆地確認房源周邊環境。</p>
+    </li>
+    <li>
+        即時留言功能：
+        <br>
+        <img src="https://yourgifurl.com/realtime_messaging.gif" alt="即時留言功能" width="600">
+        <p>租客與房東可以即時留言互動，促進雙方溝通，提升資訊透明度。</p>
+    </li>
+    <li>
+        動畫效果優化：
+        <br>
+        <img src="https://yourgifurl.com/animation_effect.gif" alt="動畫效果優化" width="600">
+        <p>利用 Animate.css 增加頁面動態效果，提供更吸引人的視覺體驗。</p>
+    </li>
+</ul>
 </body>
 
 </html>
